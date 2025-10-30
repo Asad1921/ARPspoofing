@@ -11,14 +11,14 @@
 
 | Component       | IP Address       | Role |
 |-----------------|------------------|------|
-| **Victim**      | `172.16.16.245`  | Target machine (loses Internet) |
-| **Attacker**    | `172.16.12.113`  | Parrot OS in VMware |
+| **Victim**      | `172.16.16.235`  | Target machine (loses Internet) |
+| **Attacker**    | `172.16.12.115`  | Parrot OS in VMware |
 | **Gateway**     | `172.16.0.3`     | Default router |
 
 **Date:** October 29, 2025  
 **Status:** `SUCCESSFUL`  
 **Outcome:**  
-> Router sends all traffic for `172.16.16.245` → **Attacker MAC**  
+> Router sends all traffic for `172.16.16.235` → **Attacker MAC**  
 > Victim sends all traffic for `172.16.0.3` → **Attacker MAC**  
 > Attacker **drops all packets** → **Victim loses Internet access**
 
