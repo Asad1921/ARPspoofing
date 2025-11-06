@@ -1,3 +1,7 @@
+<img width="946" height="171" alt="image" src="https://github.com/user-attachments/assets/3ea15879-cc43-49b7-b248-8c82475d4362" />
+
+
+
 # ARP Spoofing DoS Attack – Complete Lab Report & Execution Guide
 
 > **LEGAL & ETHICAL WARNING**  
