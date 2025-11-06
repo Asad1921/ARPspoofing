@@ -24,17 +24,51 @@
 
 ---
 
-## Lab Environment
+# ARP Spoofing — Lab Notes & Defensive Guide (SAFE / EDUCATIONAL)
 
-- **Attacker OS:** Parrot Security OS (in VMware)
-- **Network Mode:** NAT or Host-Only (isolated)
-- **Tools Used:** `arpspoof` (from `dsniff`), `ping`, `ip`, `arping`
+> **Important:** The content in this repository is intended **only** for educational use, defensive research, and authorized lab testing.  
+> Do **not** use these instructions or tools against systems you do not own or do not have explicit written permission to test. Performing ARP spoofing, MITM, or other active attacks on networks without authorization is illegal and unethical.
+
+## Summary (sanitized)
+This document records an example network troubleshooting / lab scenario describing how ARP-based traffic redirection can impact connectivity, and — importantly — lists ways to **detect**, **monitor**, and **mitigate** ARP spoofing attacks in production networks.
+
+> The original offensive steps have been intentionally removed. This README focuses on:
+> - safe information collection commands
+> - monitoring and detection tools
+> - mitigation and hardening steps
+> - recommended lab practices for authorized research
 
 ---
 
-## Full Step-by-Step Execution (All Commands Included)
+## Lab environment (example)
+- Host OS: Debian/Ubuntu-based Linux (commands in this repo tested on Ubuntu 22.04)
+- Example IPs (replace with your lab's IPs):
+  - Victim (example): `172.16.16.245`
+  - Gateway (example): `172.16.0.3`
+  - Attacker (lab host): `172.16.16.10`
+- Network interface on lab host (example): `ens33`
+- **All testing must be performed in an isolated lab network (VMs, VLAN, or disconnected physical lab).**
 
-### Step 1: Install `arpspoof` on Linux System
+---
+
+## Safe reconnaissance & verification commands
+Use these commands to gather benign information about your host and local network. These commands do **not** perform attacks.
 
 ```bash
-sudo apt update && sudo apt install -y dsniff
+# Update package index
+sudo apt update
+
+# Show IP addresses and network interfaces
+ip addr show
+
+# Show routing table and default gateway
+ip route show
+
+# Show MAC address table + ARP cache
+ip neigh show          # Linux equivalent of `arp -a`
+
+# Ping a host (benign connectivity check)
+ping -c 3 172.16.16.245
+
+# Basic traceroute (connectivity path)
+traceroute 8.8.8.8     # install with `sudo apt install traceroute` if missing
